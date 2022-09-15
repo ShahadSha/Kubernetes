@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: 
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: helloworld.app
+        tier: backend
+    spec:
+      containers:
+        - name: helloworld
+          image: {{.Values.image.ECRLink}}/{{ .Values.image.repository }}:{{ .Values.image.tag }}
+          workingDir: /home/
+          command: ["/bin/sh"]
+          args: ["./startup.sh"]
+      restartPolicy: Always

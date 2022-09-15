@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: compute-resources
+spec:
+  hard:
+    requests.cpu: 1000m
+    requests.memory: 1024Mi
+    limits.cpu: 2000m
+    limits.memory: 2048Mi
+
+#Every container in the namespace limited to these resources - The whole namespace
